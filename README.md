@@ -87,10 +87,27 @@ Tokens (classic) → Generate new token (classic) → 勾选 **`repo`** → 生�
 
 ### 4. 生成二维码
 
-告诉我你的 GitHub 用户名（或者网址已经出来了），我用新地址重新生成全部二维码：
-通用码 + 12 张桌卡，每张都解码核对过。
+网址出来后（GitHub Pages 显示 "Your site is live at …"），在该网址确认能跳转后，
+用你的用户名生成**印一次就永久有效**的二维码：
+
+```bash
+cd "C:/Users/shige/WorkBuddy AI/2026-10-02-19-51-22/kpot-redirect"
+python _dev/make_redirect_qr.py <你的用户名>
+```
+
+生成在 `qrcodes-stable/`：
+
+| 文件 | 用途 |
+|---|---|
+| `entry-qr.png` / `.svg` | 通用入口码（海报、外卖单、官网） |
+| `table-01-qr.png` … `table-12-qr.png` | 12 张桌卡（还带 `.svg` 矢量版） |
+
+脚本会**把每个码解码回来核对**，全部通过才报成功——不会出现"生成了但扫不出来"。
 
 **这版码印出去以后，就再也不用换了。**
+
+> 每个桌卡的 PNG 是 700×900，顶部红色标题栏 + 超大桌号 + 二维码，
+> 可直接 A5 打印裁开；`.svg` 交给印刷厂放大不失真。
 
 ---
 
@@ -127,7 +144,9 @@ node _dev/verify_redirect.js http://127.0.0.1:8931
 | `style.css` | 跳转页样式 | ❌ |
 | `tables/<n>/index.html` | 各桌页面（由脚本生成） | ❌ 用脚本生成 |
 | `_dev/build_tables.py` | 批量生成桌号页 | 改桌数时改这里 |
+| `_dev/make_redirect_qr.py` | 生成**永久有效**的印刷二维码 | 换桌数时加 `--repo` 等参数 |
 | `_dev/verify_redirect.js` | 无头浏览器核对跳转 | ❌ |
+| `_dev/push_to_github.sh` | 一键推送到 GitHub | ❌ |
 | `.nojekyll` | 关掉 Jekyll，保证静态文件原样发布 | ❌ |
 
 ---
