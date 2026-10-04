@@ -1,5 +1,10 @@
 # KPOT To Go — 固定跳转层（GitHub Pages）
 
+> **✅ 已上线**
+> 跳转层网址：**https://shigene-netizen.github.io/kpot/**
+> 13 张二维码已生成并全部解码核对通过（`qrcodes-stable/`）。
+> **这批码印出去以后，换域名只需改 `target.js` 一行，码不用重印。**
+
 **解决的问题**：线上点餐页每次重新发布都会换域名，店里印出去的二维码全部作废。
 这一层是一个**永久不变的网址**，二维码只印它；它再转发到当前线上地址。
 以后换域名，只改 `target.js` 里的**一行**，推上去，所有印刷品继续有效。
@@ -8,13 +13,13 @@
 
 ## 一、你会得到什么
 
-| 用途 | 固定网址（举例） | 二维码编码内容 |
+| 用途 | 固定网址 | 二维码编码内容 |
 |---|---|---|
-| 通用入口（海报 / 外卖单） | `https://<用户名>.github.io/kpot/` | 同上 |
-| 1 号桌 | `https://<用户名>.github.io/kpot/tables/1/` | 同上，扫了自动带 `?table=1` |
-| 2 号桌 | `https://<用户名>.github.io/kpot/tables/2/` | 同上 |
+| 通用入口（海报 / 外卖单） | `https://shigene-netizen.github.io/kpot/` | 同上 |
+| 1 号桌 | `https://shigene-netizen.github.io/kpot/tables/1/` | 同上，扫了自动带 `?table=1` |
+| 2 号桌 | `https://shigene-netizen.github.io/kpot/tables/2/` | 同上 |
 | … | … | … |
-| 12 号桌 | `https://<用户名>.github.io/kpot/tables/12/` | 同上 |
+| 12 号桌 | `https://shigene-netizen.github.io/kpot/tables/12/` | 同上 |
 
 客人扫桌卡 → 打开上面的固定网址 → 约 0.35 秒 → 自动进入点餐页，桌号自动识别。
 整个过程客人只看得到"正在打开菜单…"，体感就是直接跳转。
