@@ -176,8 +176,50 @@ def main():
 
         print(f"  table-{n:02d}-qr.png     {'OK' if ok else 'DECODE FAILED'}  -> {turl}")
 
+    # ---------- 3. staff codes ----------
+    # These point at /staff/<key>/ on THIS layer, so they survive a domain
+    # change exactly like the table codes. Printed once, taped to the wall.
+    staff = [
+        ("board",   "KITCHEN", "Live order board",   "staff-board-qr.png"),
+        ("console", "OWNER",   "Console & QR codes", "staff-console-qr.png"),
+        ("menu",    "MENU",    "Edit prices live",   "staff-menu-qr.png"),
+    ]
+    for key, label, blurb, fname in staff:
+        surl = f"{base}/staff/{key}/"
+        sq = qr_fit(surl, target=410, border=2)
+
+        CW, CH = 700, 900
+        c = Image.new("RGB", (CW, CH), BLACK)
+        dd = ImageDraw.Draw(c)
+        dd.rectangle([0, 0, CW, 96], fill=RED)
+        centered(dd, 22, BRAND, font(40, True), WHITE, CW)
+
+        centered(dd, 130, "STAFF ONLY", font(30, True), (200, 195, 190), CW)
+        centered(dd, 172, label, font(76, True), WHITE, CW)
+
+        qs = 420
+        c.paste(exact(sq, qs), ((CW - qs) // 2, 300))
+
+        centered(dd, 760, "SCAN TO OPEN", font(34, True), RED, CW)
+        centered(dd, 806, blurb, font(24), (170, 165, 160), CW)
+        centered(dd, 846, "Admin key required (once per device)",
+                 font(20), (140, 136, 132), CW)
+
+        p = os.path.join(OUT, fname)
+        c.save(p, optimize=True)
+        ok = verify(p, surl)
+
+        q2 = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_M,
+                           box_size=12, border=2)
+        q2.add_data(surl)
+        q2.make(fit=True)
+        q2.make_image(image_factory=SvgPathImage).save(
+            os.path.join(OUT, fname.replace(".png", ".svg")))
+
+        print(f"  {fname:<22}{'OK' if ok else 'DECODE FAILED'}  -> {surl}")
+
     print()
-    total = 1 + len(list(TABLES))
+    total = 1 + len(list(TABLES)) + len(staff)
     if FAILED:
         print(f"!! {len(FAILED)} of {total} codes did NOT decode. Fix before printing:")
         for name, want, got in FAILED:
