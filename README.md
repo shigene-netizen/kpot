@@ -20,9 +20,16 @@
 | 2 号桌 | `https://shigene-netizen.github.io/kpot/tables/2/` | 同上 |
 | … | … | … |
 | 12 号桌 | `https://shigene-netizen.github.io/kpot/tables/12/` | 同上 |
+| 厨房看板（员工） | `https://shigene-netizen.github.io/kpot/staff/board/` | 转发到 `/admin-orders.html` |
+| 店主后台（员工） | `https://shigene-netizen.github.io/kpot/staff/console/` | 转发到 `/admin.html` |
+| 菜单编辑（员工） | `https://shigene-netizen.github.io/kpot/staff/menu/` | 转发到 `/admin-menu.html` |
 
 客人扫桌卡 → 打开上面的固定网址 → 约 0.35 秒 → 自动进入点餐页，桌号自动识别。
 整个过程客人只看得到"正在打开菜单…"，体感就是直接跳转。
+
+**员工码也走这一层** —— 以前员工码直接编码线上域名，一发布就失效，贴在厨房
+墙上的那张就作废了。现在它们走 `/staff/.../`，和桌卡一样**永远不用重印**。
+（`/staff/` 用的是**白名单映射**，只转发到固定的三个后台页，不会变成任意跳转。）
 
 > **这些网址永远不变。** 换域名时你只改 `target.js`，不需要动任何二维码。
 
