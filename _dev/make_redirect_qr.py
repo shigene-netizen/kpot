@@ -179,13 +179,18 @@ def main():
     # ---------- 3. staff codes ----------
     # These point at /staff/<key>/ on THIS layer, so they survive a domain
     # change exactly like the table codes. Printed once, taped to the wall.
+    #
+    # The first entry is the HUB at /staff/ (no key) — it does NOT redirect,
+    # it shows a menu of the three pages below. Handy as a single code to
+    # stick in the office: scan once, then pick which console you want.
     staff = [
+        (None,      "STAFF",   "Menu of all consoles", "staff-hub-qr.png"),
         ("board",   "KITCHEN", "Live order board",   "staff-board-qr.png"),
         ("console", "OWNER",   "Console & QR codes", "staff-console-qr.png"),
         ("menu",    "MENU",    "Edit prices live",   "staff-menu-qr.png"),
     ]
     for key, label, blurb, fname in staff:
-        surl = f"{base}/staff/{key}/"
+        surl = f"{base}/staff/{key}/" if key else f"{base}/staff/"
         sq = qr_fit(surl, target=410, border=2)
 
         CW, CH = 700, 900

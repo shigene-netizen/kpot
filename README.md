@@ -119,6 +119,8 @@ python _dev/make_redirect_qr.py <你的用户名>
 |---|---|
 | `entry-qr.png` / `.svg` | 通用入口码（海报、外卖单、官网） |
 | `table-01-qr.png` … `table-12-qr.png` | 12 张桌卡（还带 `.svg` 矢量版） |
+| `staff-hub-qr.png` | **员工总入口**（一个码，进去选后台） |
+| `staff-{board,console,menu}-qr.png` | 三个后台各自的码（贴厨房 / 收银台） |
 
 脚本会**把每个码解码回来核对**，全部通过才报成功——不会出现"生成了但扫不出来"。
 
