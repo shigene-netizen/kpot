@@ -15,7 +15,7 @@
 
 window.KPOT_TARGET = {
   /* The live KPOT To Go ordering page. No trailing slash. */
-  baseUrl: 'https://db29045e3719456fba388b4bde70fbe2.sg.agentos-app.run',
+  baseUrl: 'https://2c4c3cb6e2ce41cea51e1920f591f356.sg.agentos-app.run',
 
   /* Shown to a visitor for a moment before the forward happens. */
   storeName: 'KPOT To Go',
