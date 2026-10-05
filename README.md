@@ -32,7 +32,7 @@
 
 ```js
 window.KPOT_TARGET = {
-  baseUrl: 'https://ae14fe556e314f8fb287e0afa6dec55e.sg.agentos-app.run',
+  baseUrl: 'https://db29045e3719456fba388b4bde70fbe2.sg.agentos-app.run',
   ...
 };
 ```
