@@ -28,12 +28,20 @@
      Staff QR codes point at /staff/board/, /staff/console/, /staff/menu/ so
      the code printed once keeps working after the app is re-published on a
      new domain. Only an allow-list is mapped — this layer must never become
-     an open redirect that forwards to arbitrary paths. */
+     an open redirect that forwards to arbitrary paths.
+
+     /staff/ itself (no sub-page) is the HUB: a menu of the three pages. It
+     must NOT auto-forward, or the menu would be unusable. It is handled by
+     returning a sentinel so the destination logic can skip the redirect. */
   var STAFF_PAGES = {
     board: '/admin-orders.html',
     console: '/admin.html',
     menu: '/admin-menu.html'
   };
+
+  function isStaffHub() {
+    return /\/staff\/?$/i.test(location.pathname);
+  }
 
   function staffFromPath() {
     var m = location.pathname.match(/\/staff\/([a-z]+)\/?$/i);
@@ -42,12 +50,17 @@
     return page ? { key: m[1].toLowerCase(), path: page } : null;
   }
 
+  var hub = isStaffHub();
   var staff = staffFromPath();
   var table = tableFromQuery() || tableFromPath();
 
   /* ---- build the destination ------------------------------------------- */
-  var dest;
-  if (staff) {
+  var dest = '';
+  if (hub) {
+    /* Stay put — this is the staff menu. Leave dest empty so the redirect
+       below is skipped and the fallback stays hidden. */
+    dest = '';
+  } else if (staff) {
     // Staff pages are distinct documents, so the table query does not apply.
     dest = base + staff.path;
   } else {
@@ -87,6 +100,10 @@
   }
 
   /* ---- forward ---------------------------------------------------------- */
+  /* The staff hub is a menu of links, not a doorway. Never forward from it —
+     the empty `dest` above would otherwise be handed to location.replace(). */
+  if (hub) return;
+
   var delay = typeof T.delayMs === 'number' ? T.delayMs : 350;
   if (!base) {
     // Misconfigured: leave the user on this page with the fallback visible.

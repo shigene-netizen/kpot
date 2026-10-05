@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111014">
+<meta name="robots" content="noindex, nofollow">
+<title>KPOT To Go — Staff</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .hub { display: grid; gap: 12px; margin-top: 28px; text-align: left; }
+  .hub a {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 18px; border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #F7F1E6; text-decoration: none;
+    transition: background 120ms ease, border-color 120ms ease;
+  }
+  .hub a:hover, .hub a:focus { background: rgba(255, 255, 255, 0.11); border-color: rgba(255, 255, 255, 0.28); }
+  .hub .ic {
+    width: 42px; height: 42px; flex: none; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    background: #D7263D; color: #fff; font-size: 17px; font-weight: 700;
+  }
+  .hub .t { display: block; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .hub .s { display: block; font-size: 13px; color: #A9A39C; margin-top: 3px; }
+  .hub .arrow { margin-left: auto; color: #6E6A66; font-size: 18px; flex: none; }
+  .hub .txt { min-width: 0; flex: 1 1 auto; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="roundel">K</div>
+  <h1 id="store">KPOT To Go</h1>
+  <p class="lead">Staff console</p>
+
+  <nav class="hub">
+    <a href="board/">
+      <span class="ic">K</span>
+      <span class="txt">
+        <span class="t">Kitchen board</span>
+        <span class="s">Live orders — mark ready / picked up</span>
+      </span>
+      <span class="arrow">&rsaquo;</span>
+    </a>
+    <a href="console/">
+      <span class="ic">O</span>
+      <span class="txt">
+        <span class="t">Owner console</span>
+        <span class="s">Print table cards, check configuration</span>
+      </span>
+      <span class="arrow">&rsaquo;</span>
+    </a>
+    <a href="menu/">
+      <span class="ic">M</span>
+      <span class="txt">
+        <span class="t">Menu editor</span>
+        <span class="s">Change prices, hide sold-out items</span>
+      </span>
+      <span class="arrow">&rsaquo;</span>
+    </a>
+  </nav>
+
+  <p class="note" style="margin-top:22px">
+    Admin key required — you only enter it once per device.
+  </p>
+  <p class="note">
+    Bookmark this page. It never changes, even when the ordering site is
+    re-published on a new address.
+  </p>
+
+  <p class="note" id="fallback" hidden>
+    Not redirecting? <span id="urlText"></span>
+  </p>
+</main>
+
+<script src="../target.js"></script>
+<script src="../app.js"></script>
+</body>
+</html>

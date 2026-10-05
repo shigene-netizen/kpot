@@ -20,6 +20,7 @@
 | 2 号桌 | `https://shigene-netizen.github.io/kpot/tables/2/` | 同上 |
 | … | … | … |
 | 12 号桌 | `https://shigene-netizen.github.io/kpot/tables/12/` | 同上 |
+| **员工总入口（推荐收藏）** | `https://shigene-netizen.github.io/kpot/staff/` | **不跳转**，是三个后台的菜单页 |
 | 厨房看板（员工） | `https://shigene-netizen.github.io/kpot/staff/board/` | 转发到 `/admin-orders.html` |
 | 店主后台（员工） | `https://shigene-netizen.github.io/kpot/staff/console/` | 转发到 `/admin.html` |
 | 菜单编辑（员工） | `https://shigene-netizen.github.io/kpot/staff/menu/` | 转发到 `/admin-menu.html` |
@@ -30,6 +31,11 @@
 **员工码也走这一层** —— 以前员工码直接编码线上域名，一发布就失效，贴在厨房
 墙上的那张就作废了。现在它们走 `/staff/.../`，和桌卡一样**永远不用重印**。
 （`/staff/` 用的是**白名单映射**，只转发到固定的三个后台页，不会变成任意跳转。）
+
+**`/staff/` 本身是个菜单页，不跳转** —— 打开它是三个后台入口的列表
+（厨房看板 / 店主后台 / 菜单编辑），店主可以只收藏这一个网址，
+以后哪个后台换路径都不影响。它由 `app.js` 里的 `hub` 分支处理：
+`isStaffHub()` 命中时 `dest` 留空并**提前 `return`**，所以不会误触发跳转。
 
 > **这些网址永远不变。** 换域名时你只改 `target.js`，不需要动任何二维码。
 
@@ -151,12 +157,15 @@ node _dev/verify_redirect.js http://127.0.0.1:8931
 | 文件 | 作用 | 需要改吗 |
 |---|---|---|
 | `target.js` | **线上地址（唯一要改的文件）** | ✅ 换域名时改这 |
-| `app.js` | 读 `target.js`、拼桌号、跳转 | ❌ |
+| `app.js` | 读 `target.js`、拼桌号/员工页、跳转（`/staff/` 菜单页不跳转） | ❌ |
 | `index.html` | 通用入口页 | ❌ |
+| `staff/index.html` | **员工后台菜单页**（收藏这个） | ❌ |
+| `staff/<页>/index.html` | 三个员工转发页（脚本生成） | ❌ 用脚本生成 |
 | `style.css` | 跳转页样式 | ❌ |
 | `tables/<n>/index.html` | 各桌页面（由脚本生成） | ❌ 用脚本生成 |
 | `_dev/build_tables.py` | 批量生成桌号页 | 改桌数时改这里 |
-| `_dev/make_redirect_qr.py` | 生成**永久有效**的印刷二维码 | 换桌数时加 `--repo` 等参数 |
+| `_dev/build_staff.py` | 生成三个员工转发页 | 改后台路径时改这里 |
+| `_dev/make_redirect_qr.py` | 生成**永久有效**的印刷二维码（含员工码） | 换桌数时加 `--repo` 等参数 |
 | `_dev/verify_redirect.js` | 无头浏览器核对跳转 | ❌ |
 | `_dev/push_to_github.sh` | 一键推送到 GitHub | ❌ |
 | `.nojekyll` | 关掉 Jekyll，保证静态文件原样发布 | ❌ |

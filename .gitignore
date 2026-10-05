@@ -1,6 +1,11 @@
 # Generated print assets (regenerate with your own GitHub username)
 qrcodes-stable/
 
+# Dev-only scratch: browser test probes + screenshots
+_dev/screens/
+_dev/probe_hub.js
+_dev/wangle.js
+
 # OS noise
 Thumbs.db
 .DS_Store
