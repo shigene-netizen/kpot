@@ -15,7 +15,14 @@
 
 window.KPOT_TARGET = {
   /* The live KPOT To Go ordering page. No trailing slash. */
-  baseUrl: 'https://2c4c3cb6e2ce41cea51e1920f591f356.sg.agentos-app.run',
+  baseUrl: 'https://5ecacf1cb5f94d2396d6d1141edc28e6.sg.agentos-app.run',
+
+  /* ⚠️ SECOND READER: the kitchen print agent parses this file to find the app
+     (see kpot-order/print-agent/). Two things that break it:
+       - leaving the OLD address commented out right above — the agent strips
+         comments before matching, so it is safe, but keep only one baseUrl;
+       - changing the `baseUrl: '...'` shape (quotes, spacing) — the parser
+         matches `baseUrl` followed by a quoted string. */
 
   /* Shown to a visitor for a moment before the forward happens. */
   storeName: 'KPOT To Go',
