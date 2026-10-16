@@ -1,34 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#111014">
-<meta name="robots" content="noindex, nofollow">
-<title>KPOT To Go — Opening…</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KPOT To Go — Hot Pot &amp; Korean BBQ To Go · Atlanta, GA</title>
+<meta name="description" content="Build-your-own hot pot bowls and Korean BBQ protein bowls in Atlanta. Dine in, pickup or delivery. Open daily from 12:00 PM. 2955 Cobb Pkwy SE, Suite 830, Atlanta, GA 30339.">
+<link rel="canonical" href="https://www.kpotexpress.com/">
+<meta name="theme-color" content="#d7263d">
+
+<!-- Social sharing -->
+<meta property="og:type" content="restaurant">
+<meta property="og:site_name" content="KPOT To Go">
+<meta property="og:title" content="KPOT To Go — Hot Pot &amp; Korean BBQ To Go">
+<meta property="og:description" content="Build your own hot pot bowl from $15.99. Dine in, pickup or delivery. Open daily from 12:00 PM in Atlanta.">
+<meta property="og:url" content="https://www.kpotexpress.com/">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍲</text></svg>">
+
+<!-- Structured data: this is what lets Google show hours, address and the
+     order link directly in search results. Kept in sync with assets/config.js
+     in the ordering app — if the shop's hours change, change BOTH. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "KPOT To Go",
+  "url": "https://www.kpotexpress.com/",
+  "telephone": "+1-678-335-5388",
+  "servesCuisine": ["Korean", "Hot Pot", "Barbecue"],
+  "priceRange": "$$",
+  "currenciesAccepted": "USD",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2955 Cobb Pkwy SE, Suite 830",
+    "addressLocality": "Atlanta",
+    "addressRegion": "GA",
+    "postalCode": "30339",
+    "addressCountry": "US"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+      "opens": "12:00",
+      "closes": "21:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Friday", "Saturday"],
+      "opens": "12:00",
+      "closes": "22:30"
+    }
+  ]
+}
+</script>
 </head>
 <body>
-<main class="wrap">
-  <div class="roundel">K</div>
-  <h1 id="store">KPOT To Go</h1>
-  <p class="lead">Taking you to the menu…</p>
 
-  <a id="go" class="go" href="#" rel="noopener">Continue to order&nbsp;→</a>
+<!-- The ordering entry point is defined in ONE place: ORDER_URL in script.js.
+     Nothing on this page hard-codes the app's address, so re-publishing the
+     app on a new host never means editing this file. -->
+<header class="hdr">
+  <div class="wrap-narrow">
+    <a class="brand" href="#top">
+      <span class="brand-mark">🍲</span>
+      <span class="brand-name">KPOT<span class="thin">To Go</span></span>
+    </a>
+    <nav class="nav">
+      <a href="#menu">Menu</a>
+      <a href="#rewards">Rewards</a>
+      <a href="#visit">Hours</a>
+      <a class="btn btn-sm" data-order href="#">Order Online</a>
+    </nav>
+  </div>
+</header>
 
-  <noscript>
-    <p class="note">
-      JavaScript is off. Tap the button above to open the ordering page.
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <p class="eyebrow">Hot Pot &amp; Korean BBQ · To Go</p>
+    <h1>Build your own bowl.<br>Ready in about 20 minutes.</h1>
+    <p class="lede">
+      Choose your broth, noodle, protein, vegetables and sauce — or go for a
+      Korean BBQ protein bowl. Dine in at your table, pick it up, or have it
+      delivered.
     </p>
-  </noscript>
+    <div class="cta">
+      <a class="btn btn-lg" data-order href="#">Order Online</a>
+      <a class="btn btn-ghost btn-lg" href="tel:+16783355388">Call (678) 335-5388</a>
+    </div>
+    <ul class="hero-facts">
+      <li><b>12:00 PM</b> open daily</li>
+      <li><b>Sun–Thu</b> till 9:30 PM</li>
+      <li><b>Fri–Sat</b> till 10:30 PM</li>
+    </ul>
+  </div>
+</section>
 
-  <p class="note" id="fallback" hidden>
-    Not redirecting?
-    <span id="urlText"></span>
-  </p>
-</main>
+<section class="ways" id="order">
+  <h2>Three ways to get it</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="ico">🍽️</div>
+      <h3>Dine-In</h3>
+      <p>Order from your table — scan the code on the table and it comes to you.</p>
+    </div>
+    <div class="card">
+      <div class="ico">🛍️</div>
+      <h3>Pickup / To Go</h3>
+      <p>Order ahead and skip the wait. Ready in roughly 20–25 minutes.</p>
+    </div>
+    <div class="card">
+      <div class="ico">🛵</div>
+      <h3>Delivery</h3>
+      <p>Within about 5 miles. Around 40 minutes depending on distance.</p>
+    </div>
+  </div>
+  <div class="ways-cta">
+    <a class="btn btn-lg" data-order href="#">Start an order</a>
+    <p class="fine">Opens the ordering page — no app to install.</p>
+  </div>
+</section>
 
-<script src="target.js"></script>
-<script src="app.js"></script>
+<!-- The rewards are the reason to come back, so they are on the front page and
+     not buried. Values here must match POINT_REDEEM_VALUE / STAMP_VALUE /
+     RETURN_VALUE in kpot-order/customers.js — change one, change both. -->
+<section class="rewards" id="rewards">
+  <h2>Get rewarded every time you order</h2>
+  <p class="sub">Just enter your phone number at checkout. No card to carry, no app to install.</p>
+  <div class="rw-grid">
+    <div class="rw">
+      <div class="rw-ico">⭐</div>
+      <span class="rw-val">$10</span>
+      <span class="rw-lab">per 100 points</span>
+      <p>Earn 1 point for every $1 you spend, before tax and tip.</p>
+    </div>
+    <div class="rw">
+      <div class="rw-ico">🎟️</div>
+      <span class="rw-val">$7</span>
+      <span class="rw-lab">per 10 stamps</span>
+      <p>One stamp for every paid order. Points and stamps never expire.</p>
+    </div>
+    <div class="rw">
+      <div class="rw-ico">↩️</div>
+      <span class="rw-val">$3</span>
+      <span class="rw-lab">come back coupon</span>
+      <p>Spend $10 or more and get $3 off your next visit within 7 days.</p>
+    </div>
+  </div>
+  <p class="fine rw-note">One reward per order. Rewards do not stack.</p>
+</section>
+
+<section class="menu" id="menu">
+  <h2>Menu</h2>
+  <p class="sub">Prices before tax. Sales tax is 6%.</p>
+
+  <!-- Hot Pot ------------------------------------------------------------ -->
+  <article class="dish">
+    <div class="dish-head">
+      <h3>Hot Pot To Go</h3>
+      <span class="price">$15.99</span>
+    </div>
+    <p class="tagline">Build Your Own Bowl — pick one from each step.</p>
+    <div class="steps">
+      <div class="step"><h4>1 Broth</h4><p>Japanese Miso · Korean Seafood · Healthy Herb · Szechuan Spicy · Mushroom · Tomato</p></div>
+      <div class="step"><h4>1 Noodle</h4><p>Ramen · Vermicelli · Udon · Sweet Potato Noodles · Rice Cakes</p></div>
+      <div class="step"><h4>1 Protein</h4><p>Ribeye · Beef Belly · Sliced Chicken · Sliced Pork · Mussels · Fried Tofu</p></div>
+      <div class="step"><h4>1 Topping</h4><p>Chicken Dumplings (6) · Shrimp Dumplings (6) · Mini Sausages · Fish Cakes · Quail Eggs · Beef Meatballs · Crab Meat</p></div>
+      <div class="step"><h4>3 Vegetables</h4><p>Napa Cabbage · Corn · Spinach · Enoki Mushrooms · Shiitake Mushrooms · Bok Choy · Zucchini · Eggplant · Lotus Root</p></div>
+      <div class="step"><h4>1 Sauce on the side</h4><p>Sweet &amp; Spicy · KPOT Sauce · Gochujang · Yum Yum Sauce</p></div>
+    </div>
+  </article>
+
+  <!-- BBQ ---------------------------------------------------------------- -->
+  <article class="dish">
+    <div class="dish-head">
+      <h3>BBQ To Go</h3>
+      <span class="price">from $12.99</span>
+    </div>
+    <p class="tagline">Korean BBQ protein bowls. Comes with white rice, kimchi and grilled veggies.</p>
+    <div class="sizes">
+      <div class="size"><b>Pick 1</b><span>$12.99</span></div>
+      <div class="size"><b>Pick 2</b><span>$15.99</span></div>
+      <div class="size"><b>Pick 3</b><span>$18.99</span></div>
+    </div>
+    <div class="step">
+      <h4>Proteins</h4>
+      <p>Beef Bulgogi · Spicy Beef Bulgogi · Garlic Chicken · Spicy Chicken · Garlic Shrimp · Sliced Beef Belly · Smoked Garlic Pork Belly · Spicy Pork Belly</p>
+    </div>
+  </article>
+
+  <!-- Drinks ------------------------------------------------------------- -->
+  <article class="dish">
+    <div class="dish-head"><h3>Drinks</h3></div>
+    <div class="pricelist">
+      <div class="row"><b>Fountain Drinks</b><span>$2.99</span><p>Pepsi · Pepsi Zero Sugar · Lemonade · Sweet Tea · Unsweet Tea · Orange Crush · Ginger Ale · Mtn Dew <em>— free refills in store</em></p></div>
+      <div class="row"><b>Bubble Tea</b><span>$4.99</span><p>Original Black Milk Tea · Thai Milk Tea · Mango Milk Tea · Taro Milk Tea</p></div>
+      <div class="row"><b>Fruit Teas w/ Jelly</b><span>$4.99</span><p>Strawberry Black Tea · Lychee Black Tea · Mango Peach Green Tea · Passion Fruit Green Tea</p></div>
+      <div class="row"><b>Specialty Lemonades</b><span>$4.50</span><p>Watermelon Mint Lemonade · Mango Lychee Refresher · Classic Strawberry Lemonade · Classic Watermelon Lemonade</p></div>
+    </div>
+  </article>
+
+  <!-- A La Carte --------------------------------------------------------- -->
+  <article class="dish">
+    <div class="dish-head"><h3>A La Carte</h3></div>
+    <div class="pricelist">
+      <div class="row"><b>Korean Fried Chicken Wings (6)</b><span>$8.99</span></div>
+      <div class="row"><b>Korean Fried Chicken Wings (10)</b><span>$12.99</span></div>
+      <div class="row"><b>Fried Spring Rolls (2)</b><span>$2.99</span></div>
+      <div class="row"><b>Chinese Donuts (4)</b><span>$3.99</span></div>
+      <div class="row"><b>Sesame Balls with Red Bean Paste (6)</b><span>$5.99</span></div>
+      <div class="row"><b>Fried Mochi Balls with Taro (6)</b><span>$5.99</span></div>
+      <div class="row"><b>Side of Fries</b><span>$2.99</span></div>
+      <div class="row"><b>Side of Sliced Pickled Radish</b><span>$5.99</span></div>
+      <div class="row"><b>Side of Kimchi</b><span>$5.99</span></div>
+      <div class="row"><b>4 oz Soup (Broth Only)</b><span>$2.99</span></div>
+      <div class="row"><b>Side of White Rice</b><span>$1.50</span></div>
+      <div class="row"><b>Cheesy Corn</b><span>$5.99</span></div>
+    </div>
+  </article>
+
+  <div class="menu-cta">
+    <a class="btn btn-lg" data-order href="#">Order now</a>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <h2>Hours &amp; Location</h2>
+  <div class="visit-grid">
+    <div class="panel">
+      <h3>Hours</h3>
+      <table class="hours">
+        <tr><td>Sunday</td><td>12:00 PM – 9:30 PM</td></tr>
+        <tr><td>Monday</td><td>12:00 PM – 9:30 PM</td></tr>
+        <tr><td>Tuesday</td><td>12:00 PM – 9:30 PM</td></tr>
+        <tr><td>Wednesday</td><td>12:00 PM – 9:30 PM</td></tr>
+        <tr><td>Thursday</td><td>12:00 PM – 9:30 PM</td></tr>
+        <tr class="hi"><td>Friday</td><td>12:00 PM – 10:30 PM</td></tr>
+        <tr class="hi"><td>Saturday</td><td>12:00 PM – 10:30 PM</td></tr>
+      </table>
+      <p class="fine">Last seating is one hour before closing.</p>
+    </div>
+    <div class="panel">
+      <h3>Find us</h3>
+      <p class="addr">
+        2955 Cobb Pkwy SE, Suite 830<br>
+        Atlanta, GA 30339
+      </p>
+      <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=2955+Cobb+Pkwy+SE+Suite+830+Atlanta+GA+30339" target="_blank" rel="noopener">Open in Maps</a>
+      <p class="fine" style="margin-top:1rem">
+        Phone: <a href="tel:+16783355388">(678) 335-5388</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="ftr">
+  <div class="ftr-inner">
+    <div>
+      <div class="brand-name">KPOT<span class="thin">To Go</span></div>
+      <p class="fine">2955 Cobb Pkwy SE, Suite 830, Atlanta, GA 30339</p>
+    </div>
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#rewards">Rewards</a>
+      <a href="#visit">Hours</a>
+      <a data-order href="#">Order Online</a>
+      <a href="tel:+16783355388">(678) 335-5388</a>
+    </nav>
+  </div>
+  <p class="fine center">Prices before tax. Sales tax 6%. Menu items subject to availability.</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>

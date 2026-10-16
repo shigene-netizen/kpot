@@ -54,13 +54,24 @@ async function main() {
   /* Each case is [path, wantTable, wantPath].
        wantTable — the ?table=N the destination must carry (null = must not)
        wantPath  — the path the destination must end at (staff pages only)
-       wantPath === '__STAY__' — this page must NOT redirect at all. Only the
-                                 staff hub `/staff/` does that: it is the menu
-                                 page itself, served here. `/staff/menu/` is a
-                                 DIFFERENT path and does redirect (to the menu
-                                 editor) — do not confuse the two. */
+       wantPath === '__STAY__' — this page must NOT redirect at all: it is
+                                 content served from this layer, not a doorway.
+                                 `/staff/` is the staff menu; `/` is the public
+                                 landing page (since 2026-10-16). `/staff/menu/`
+                                 is a DIFFERENT path and does redirect (to the
+                                 menu editor) — do not confuse the two.
+       wantPath === '__LEAVE__' — this page must leave this host and forward to
+                                 the ordering app, carrying no ?table=. Used for
+                                 `/order/`, the doorway every "Order Online"
+                                 button on the landing page depends on.
+
+     ⚠️ An empty wantPath only asserts "the destination has no ?table=", which
+     passes even when the page never redirected at all. That was a false green
+     for `/` once the root became a landing page — never use '' for a page that
+     is supposed to move; use __LEAVE__ so a page that sits still fails. */
   const cases = [
-    ['/', null, ''],
+    ['/', null, '__STAY__'],
+    ['/order/', null, '__LEAVE__'],
     ['/tables/1/', '1', ''],
     ['/tables/7/', '7', ''],
     ['/tables/12/', '12', ''],
@@ -81,6 +92,11 @@ async function main() {
     let ok;
     if (wantPath === '__STAY__') {
       ok = got.indexOf(BASE) === 0;          // stayed on the redirect host
+    } else if (wantPath === '__LEAVE__') {
+      /* Left this host AND carried no table number. Without the first half this
+         would pass while the page sat still — the exact false green this file
+         used to have on '/'. */
+      ok = got.indexOf(BASE) !== 0 && !hasTable;
     } else if (wantPath) {
       /* Staff pages must leave the redirect host AND land on the right document.
          Checking only the suffix would pass even if it never redirected. */
@@ -92,10 +108,46 @@ async function main() {
     if (ok) pass++;
   }
 
-  console.log('\n' + pass + '/' + cases.length + ' passed');
+  /* ---- the landing page itself ------------------------------------------
+     Staying put is not enough: '/' could sit still while still being the old
+     "Opening…" bounce page. Pin what the page actually IS — and pin the trap
+     that bites hardest, because it fails silently: an "Order Online" button
+     pointing back at '/' reloads the landing page instead of opening the menu,
+     which looks like a working button and sells nothing. */
+  const extra = [];
+
+  await send('Page.navigate', { url: BASE + '/' });
+  await sleep(1200);
+  const t = await send('Runtime.evaluate', { expression: 'document.title', returnByValue: true });
+  const title = String((t.result && t.result.value) || '');
+  extra.push([
+    '/ serves the landing page, not the "Opening…" bounce',
+    /KPOT To Go/.test(title) && !/Opening/i.test(title),
+    title
+  ]);
+
+  const b = await send('Runtime.evaluate', {
+    expression: "Array.prototype.slice.call(document.querySelectorAll('[data-order]'))" +
+                ".map(function (a) { return a.getAttribute('href') || ''; }).join('|')",
+    returnByValue: true
+  });
+  const hrefs = String((b.result && b.result.value) || '').split('|').filter(Boolean);
+  extra.push([
+    'every order button points at /order/, never back at /',
+    hrefs.length > 0 && hrefs.every(function (h) { return h.indexOf('/order/') === 0; }),
+    hrefs.join('  ') || '(no buttons found — the selector changed)'
+  ]);
+
+  for (const [label, ok, detail] of extra) {
+    console.log((ok ? '  PASS  ' : '  FAIL  ') + label + '  [' + detail + ']');
+    if (ok) pass++;
+  }
+
+  const total = cases.length + extra.length;
+  console.log('\n' + pass + '/' + total + ' passed');
   ws.close();
   try { chrome.kill(); } catch (e) {}
   await sleep(300);
-  process.exit(pass === cases.length ? 0 : 2);
+  process.exit(pass === total ? 0 : 2);
 }
 main().catch((e) => { console.error('ERR', e.message); process.exit(1); });

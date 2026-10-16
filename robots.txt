@@ -1,2 +1,10 @@
 User-agent: *
-Disallow: /
+Allow: /
+
+# Doorways, not content: they bounce straight to the ordering app, and the
+# staff pages need an admin key. Nothing here is worth a place in search.
+Disallow: /order/
+Disallow: /tables/
+Disallow: /staff/
+
+Sitemap: https://www.kpotexpress.com/sitemap.xml
