@@ -51,20 +51,44 @@ async function main() {
   await send('Runtime.enable');
   await send('Page.enable');
 
-  const cases = [['/', null], ['/tables/1/', '1'], ['/tables/7/', '7'], ['/tables/12/', '12']];
+  /* Each case is [path, wantTable, wantPath].
+       wantTable — the ?table=N the destination must carry (null = must not)
+       wantPath  — the path the destination must end at (staff pages only)
+       wantPath === '__STAY__' — this page must NOT redirect at all. Only the
+                                 staff hub `/staff/` does that: it is the menu
+                                 page itself, served here. `/staff/menu/` is a
+                                 DIFFERENT path and does redirect (to the menu
+                                 editor) — do not confuse the two. */
+  const cases = [
+    ['/', null, ''],
+    ['/tables/1/', '1', ''],
+    ['/tables/7/', '7', ''],
+    ['/tables/12/', '12', ''],
+    ['/staff/board/', null, '/admin-orders.html'],
+    ['/staff/console/', null, '/admin.html'],
+    ['/staff/menu/', null, '/admin-menu.html'],
+    ['/staff/', null, '__STAY__']
+  ];
   console.log('Redirect layer check @ ' + BASE + '\n');
   let pass = 0;
 
-  for (const [p, wantTable] of cases) {
+  for (const [p, wantTable, wantPath] of cases) {
     await send('Page.navigate', { url: BASE + p });
     await sleep(2500);                       // redirect delay is 350ms
     const r = await send('Runtime.evaluate', { expression: 'location.href', returnByValue: true });
     const got = r.result.value;
     const hasTable = /\?table=(\d+)/.exec(got);
-    const ok = wantTable
-      ? (hasTable && hasTable[1] === wantTable)
-      : !hasTable;
-    console.log((ok ? '  PASS  ' : '  FAIL  ') + p.padEnd(15) + ' -> ' + got);
+    let ok;
+    if (wantPath === '__STAY__') {
+      ok = got.indexOf(BASE) === 0;          // stayed on the redirect host
+    } else if (wantPath) {
+      /* Staff pages must leave the redirect host AND land on the right document.
+         Checking only the suffix would pass even if it never redirected. */
+      ok = got.indexOf(BASE) !== 0 && got.indexOf(wantPath) === got.length - wantPath.length;
+    } else {
+      ok = wantTable ? (hasTable && hasTable[1] === wantTable) : !hasTable;
+    }
+    console.log((ok ? '  PASS  ' : '  FAIL  ') + p.padEnd(17) + ' -> ' + got);
     if (ok) pass++;
   }
 
