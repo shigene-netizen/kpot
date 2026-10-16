@@ -15,7 +15,7 @@
 
 window.KPOT_TARGET = {
   /* The live KPOT To Go ordering page. No trailing slash. */
-  baseUrl: 'https://5ecacf1cb5f94d2396d6d1141edc28e6.sg.agentos-app.run',
+  baseUrl: 'https://order.kpotexpress.com',
 
   /* ⚠️ SECOND READER: the kitchen print agent parses this file to find the app
      (see kpot-order/print-agent/). Two things that break it:
