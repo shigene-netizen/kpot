@@ -95,6 +95,22 @@ img, svg { max-width: 100%; }
 
 .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 26px 0 30px; }
 
+/* What we don't charge — the two claims that decide a delivery order
+   before the menu is even read. Keep the copy in index.html TRUE:
+   delivery fee is 0 (config.js) and there is no order minimum. */
+.hero-perks {
+  list-style: none; margin: 0 0 26px; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.hero-perks li {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--white); border: 1px solid rgba(215, 38, 61, .32);
+  border-radius: 999px; padding: 9px 17px;
+  font-size: .95rem; font-weight: 800; letter-spacing: .05em;
+  color: var(--black); box-shadow: var(--shadow);
+}
+.hero-perks .tick { color: var(--red); font-weight: 800; }
+
 .hero-facts {
   list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 26px;
   font-size: .95rem; color: var(--muted);

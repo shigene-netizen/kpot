@@ -90,6 +90,16 @@
       <a class="btn btn-lg" data-order href="#">Order Online</a>
       <a class="btn btn-ghost btn-lg" href="tel:+16783355388">Call (678) 335-5388</a>
     </div>
+    <!-- What the shop does NOT charge, said before the customer has to ask.
+         Both claims must stay TRUE: the delivery fee is 0 and there is no
+         order minimum (kpot-order/assets/config.js — fee 0 with
+         freeDelivery: true; there is no minimum logic anywhere in the app).
+         NO TIPS is deliberately absent: the owner asked for it to be left
+         out on 2026-10-19. -->
+    <ul class="hero-perks">
+      <li><span class="tick" aria-hidden="true">✓</span>NO DELIVERY FEE</li>
+      <li><span class="tick" aria-hidden="true">✓</span>NO MINIMUM</li>
+    </ul>
     <ul class="hero-facts">
       <li><b>12:00 PM</b> open daily</li>
       <li><b>Sun–Thu</b> till 9:30 PM</li>
@@ -114,7 +124,8 @@
     <div class="card">
       <div class="ico">🛵</div>
       <h3>Delivery</h3>
-      <p>Within about 2 miles. Around 40 minutes depending on distance.</p>
+      <p>Within about 2 miles. Around 40 minutes depending on distance.
+         <b>No delivery fee, no minimum.</b></p>
     </div>
   </div>
   <div class="ways-cta">
