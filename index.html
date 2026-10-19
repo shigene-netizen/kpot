@@ -91,14 +91,17 @@
       <a class="btn btn-ghost btn-lg" href="tel:+16783355388">Call (678) 335-5388</a>
     </div>
     <!-- What the shop does NOT charge, said before the customer has to ask.
-         Both claims must stay TRUE: the delivery fee is 0 and there is no
-         order minimum (kpot-order/assets/config.js — fee 0 with
-         freeDelivery: true; there is no minimum logic anywhere in the app).
+         The ONE claim here must stay TRUE: the delivery fee is 0
+         (kpot-order/assets/config.js — fee 0 with freeDelivery: true).
          NO TIPS is deliberately absent: the owner asked for it to be left
-         out on 2026-10-19. -->
+         out on 2026-10-19.
+         "NO MINIMUM" lived here for one day and was withdrawn the same day:
+         the owner set a $10 delivery minimum in the ordering app
+         (delivery.minSubtotal), enforced at both money gates. Do NOT re-add
+         the pill — the app now refuses a smaller delivery, so the promise
+         would be a lie within a refresh. -->
     <ul class="hero-perks">
       <li><span class="tick" aria-hidden="true">✓</span>NO DELIVERY FEE</li>
-      <li><span class="tick" aria-hidden="true">✓</span>NO MINIMUM</li>
     </ul>
     <ul class="hero-facts">
       <li><b>12:00 PM</b> open daily</li>
@@ -125,7 +128,7 @@
       <div class="ico">🛵</div>
       <h3>Delivery</h3>
       <p>Within about 2 miles. Around 40 minutes depending on distance.
-         <b>No delivery fee, no minimum.</b></p>
+         <b>Free delivery on orders of $10 or more.</b></p>
     </div>
   </div>
   <div class="ways-cta">

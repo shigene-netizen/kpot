@@ -95,9 +95,11 @@ img, svg { max-width: 100%; }
 
 .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 26px 0 30px; }
 
-/* What we don't charge — the two claims that decide a delivery order
-   before the menu is even read. Keep the copy in index.html TRUE:
-   delivery fee is 0 (config.js) and there is no order minimum. */
+/* What we don't charge — the claim that decides a delivery order before the
+   menu is even read. Keep the copy in index.html TRUE: the delivery fee is 0
+   (config.js). The "$10 minimum" that once sat beside this pill was moved
+   INTO the app on 2026-10-19, so it is no longer something we advertise —
+   the ordering page states it where the cart is. */
 .hero-perks {
   list-style: none; margin: 0 0 26px; padding: 0;
   display: flex; flex-wrap: wrap; gap: 10px;
